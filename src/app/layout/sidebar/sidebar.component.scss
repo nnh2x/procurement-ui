@@ -1,0 +1,121 @@
+.sidebar {
+  width: 248px;
+  height: 100vh;
+  background: var(--color-surface, #fff);
+  border-right: 1px solid var(--color-border, #e2e8f0);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-top {
+  padding: 11px 16px 12px;
+  border-bottom: 1px solid var(--color-border, #e2e8f0);
+}
+
+.sidebar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: var(--color-bg, #f8fafc);
+    color: var(--color-text, #0f172a);
+  }
+}
+
+.sidebar-service {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 16px;
+}
+
+.sidebar-service-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  span { font-size: 18px; }
+}
+
+.sidebar-service-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.sidebar-service-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text, #0f172a);
+}
+
+.sidebar-service-sub {
+  font-size: 11px;
+  color: var(--color-text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nav-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-muted, #94a3b8);
+  padding: 8px 8px 4px;
+  display: block;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  &:hover:not(.sidebar-nav-item--active) {
+    background: var(--color-bg, #f8fafc);
+    color: var(--color-text, #0f172a);
+  }
+
+  &--active {
+    background: var(--color-primary-light, #eef2ff);
+    color: var(--color-primary, #6366f1);
+    font-weight: 600;
+  }
+}
+
+.nav-item-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.nav-item-label { flex: 1; }

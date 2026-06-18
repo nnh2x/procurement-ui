@@ -1,0 +1,28 @@
+<app-page-header title="Dashboard" subtitle="Procurement overview" />
+
+@if (loading$ | async) {
+  <div class="flex justify-center mt-10"><nz-spin nzSize="large" /></div>
+} @else {
+  @if (summary$ | async; as summary) {
+    <div nz-row [nzGutter]="[16, 16]">
+      <div nz-col [nzSpan]="6">
+        <app-stat-card title="Total PRs" [value]="summary.totalPrs" color="#1890ff" />
+      </div>
+      <div nz-col [nzSpan]="6">
+        <app-stat-card title="Draft" [value]="summary.draftPrs" color="#faad14" />
+      </div>
+      <div nz-col [nzSpan]="6">
+        <app-stat-card title="Submitted" [value]="summary.submittedPrs" color="#722ed1" />
+      </div>
+      <div nz-col [nzSpan]="6">
+        <app-stat-card title="Approved" [value]="summary.approvedPrs" color="#52c41a" />
+      </div>
+      <div nz-col [nzSpan]="6">
+        <app-stat-card title="Rejected" [value]="summary.rejectedPrs" color="#f5222d" />
+      </div>
+      <div nz-col [nzSpan]="6">
+        <app-stat-card title="Total Vendors" [value]="summary.totalVendors" color="#13c2c2" />
+      </div>
+    </div>
+  }
+}

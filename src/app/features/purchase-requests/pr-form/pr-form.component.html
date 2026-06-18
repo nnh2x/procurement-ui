@@ -1,0 +1,80 @@
+<app-page-header [title]="isEditMode ? 'Edit Purchase Request' : 'New Purchase Request'" />
+
+<nz-divider />
+
+<form nz-form [formGroup]="form" nzLayout="vertical" (ngSubmit)="submit()" class="max-w-3xl">
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label nzRequired>Title</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="title" placeholder="PR title" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label>Department</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="department" placeholder="e.g. IT, Finance" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label>Expected Date</nz-form-label>
+        <nz-form-control>
+          <nz-date-picker formControlName="expectedDate" nzPlaceHolder="Select date" class="w-full" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input formControlName="description" [nzAutosize]="{ minRows: 3 }"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <nz-divider nzText="Line Items" />
+
+  <div formArrayName="items">
+    @for (item of items.controls; track $index) {
+      <div [formGroupName]="$index" nz-row [nzGutter]="8" class="mb-3 items-center">
+        <div nz-col [nzSpan]="6">
+          <input nz-input formControlName="itemName" placeholder="Item name" />
+        </div>
+        <div nz-col [nzSpan]="3">
+          <nz-input-number formControlName="quantity" [nzMin]="1" placeholder="Qty" class="w-full" />
+        </div>
+        <div nz-col [nzSpan]="3">
+          <input nz-input formControlName="unit" placeholder="Unit" />
+        </div>
+        <div nz-col [nzSpan]="5">
+          <nz-input-number formControlName="unitPrice" [nzMin]="0" placeholder="Unit price" class="w-full" />
+        </div>
+        <div nz-col [nzSpan]="5">
+          <input nz-input formControlName="notes" placeholder="Notes" />
+        </div>
+        <div nz-col [nzSpan]="2">
+          <button nz-button nzDanger nzType="text" type="button" (click)="removeItem($index)">
+            <span nz-icon nzType="delete"></span>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <button nz-button nzType="dashed" type="button" (click)="addItem()" class="mb-4">
+    <span nz-icon nzType="plus"></span> Add Item
+  </button>
+
+  <div class="flex gap-3 mt-4">
+    <button nz-button nzType="primary" type="submit" [nzLoading]="(loading$ | async) ?? false">
+      {{ isEditMode ? 'Update' : 'Create' }} PR
+    </button>
+    <button nz-button type="button" routerLink="/procurement/purchase-requests">Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,24 @@
+<div class="login-page">
+  <nz-card class="login-card" nzTitle="Procurement Portal">
+    @if (errorMessage) {
+      <nz-alert nzType="error" [nzMessage]="errorMessage" nzShowIcon class="mb-4" />
+    }
+    <form nz-form [formGroup]="form" nzLayout="vertical" (ngSubmit)="submit()">
+      <nz-form-item>
+        <nz-form-label nzRequired>Email</nz-form-label>
+        <nz-form-control nzErrorTip="Please enter a valid email">
+          <input nz-input formControlName="email" type="email" placeholder="you@company.com" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired>Password</nz-form-label>
+        <nz-form-control nzErrorTip="Password is required">
+          <input nz-input formControlName="password" type="password" placeholder="••••••••" />
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button nzType="primary" nzBlock [nzLoading]="loading" type="submit">
+        Sign in
+      </button>
+    </form>
+  </nz-card>
+</div>

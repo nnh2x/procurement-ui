@@ -1,0 +1,128 @@
+<div class="data-table">
+  <nz-table
+    [nzData]="data"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [nzPageSize]="pageSize"
+    [nzFrontPagination]="false"
+    [nzShowTotal]="totalTpl"
+    [nzNoResult]="emptyTpl"
+    nzSize="middle"
+    (nzPageIndexChange)="pageChange.emit($event)"
+  >
+    <thead>
+      <tr>
+        @if (selectable) {
+          <th nzWidth="48px" nzAlign="center">
+            <label
+              nz-checkbox
+              [nzChecked]="allChecked"
+              [nzIndeterminate]="indeterminate"
+              (nzCheckedChange)="toggleAll($event)"
+            ></label>
+          </th>
+        }
+        @for (col of columns; track col.key) {
+          <th [style.width]="col.width" [style.text-align]="col.align ?? 'left'">
+            {{ col.label }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data; track row.id ?? $index) {
+        <tr [class.row-selected]="selectable && selected.has(row)">
+          @if (selectable) {
+            <td nzAlign="center">
+              <label
+                nz-checkbox
+                [nzChecked]="selected.has(row)"
+                (nzCheckedChange)="toggleRow(row, $event)"
+              ></label>
+            </td>
+          }
+          @for (col of columns; track col.key) {
+            <td [style.text-align]="col.align ?? 'left'">
+
+              @switch (col.type ?? 'text') {
+
+                @case ('badge') {
+                  <app-status-badge [status]="get(row, col.field)" />
+                }
+
+                @case ('code') {
+                  <span class="code-chip">{{ get(row, col.field) }}</span>
+                }
+
+                @case ('date') {
+                  {{ get(row, col.field) | date:(col.dateFormat ?? 'dd/MM/yy') }}
+                }
+
+                @case ('amount') {
+                  <span class="cell-amount">{{ get(row, col.field) | number }}</span>
+                  @if (col.currencyField) {
+                    <span class="cell-currency"> {{ get(row, col.currencyField) }}</span>
+                  }
+                }
+
+                @case ('avatar-name') {
+                  <div class="avatar-name-cell">
+                    <div class="avatar-chip">{{ get(row, col.field)?.[0]?.toUpperCase() }}</div>
+                    <span class="cell-primary">{{ get(row, col.field) }}</span>
+                  </div>
+                }
+
+                @case ('view') {
+                  <button nz-button nzType="text" nzSize="small" class="btn-action btn-view" (click)="rowView.emit(row)">
+                    <span nz-icon nzType="eye"></span>
+                  </button>
+                }
+
+                @case ('edit') {
+                  <button nz-button nzType="text" nzSize="small" class="btn-action btn-edit" (click)="rowEdit.emit(row)">
+                    <span nz-icon nzType="edit"></span>
+                  </button>
+                }
+
+                @case ('delete') {
+                  <button
+                    nz-button nzType="text" nzSize="small" nzDanger
+                    class="btn-action btn-delete"
+                    nz-popconfirm
+                    nzPopconfirmTitle="Xac nhan xoa dong nay?"
+                    nzOkText="Xoa"
+                    nzCancelText="Huy"
+                    nzPopconfirmPlacement="left"
+                    (nzOnConfirm)="rowDelete.emit(row)"
+                  >
+                    <span nz-icon nzType="delete"></span>
+                  </button>
+                }
+
+                @case ('custom') {
+                  @if (col.cellTemplate) {
+                    <ng-container *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row }" />
+                  }
+                }
+
+                @default {
+                  <span class="cell-text">{{ get(row, col.field) }}</span>
+                }
+
+              }
+
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>
+
+<ng-template #totalTpl let-total>
+  <span class="table-total">{{ total }} ket qua</span>
+</ng-template>
+
+<ng-template #emptyTpl>
+  <app-empty-state [icon]="emptyIcon" [title]="emptyTitle" [description]="emptyDescription" />
+</ng-template>

@@ -1,0 +1,15 @@
+@use 'variables' as v;
+
+// NG-ZORRO theme overrides
+:root {
+  --ant-primary-color: #{v.$primary-color};
+}
+
+.ant-layout {
+  background: v.$background;
+}
+
+.ant-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}

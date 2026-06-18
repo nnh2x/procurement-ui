@@ -1,0 +1,23 @@
+<app-page-header title="Vendors">
+  <button nz-button nzType="primary" routerLink="/procurement/vendors/new">
+    <span nz-icon nzType="plus"></span>
+    Add Vendor
+  </button>
+</app-page-header>
+
+<app-filter-bar
+  searchPlaceholder="Tìm theo tên, mã số thuế..."
+  [filters]="filterConfigs"
+  (filterChange)="onFilterChange($event)"
+/>
+
+<app-data-table
+  [columns]="columns"
+  [data]="(items$ | async) ?? []"
+  [loading]="(loading$ | async) ?? false"
+  [total]="(total$ | async) ?? 0"
+  emptyIcon="team"
+  emptyTitle="Chưa có nhà cung cấp"
+  emptyDescription="Thêm nhà cung cấp đầu tiên để bắt đầu."
+  (pageChange)="onPageChange($event)"
+/>

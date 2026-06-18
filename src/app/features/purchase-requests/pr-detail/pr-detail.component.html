@@ -1,0 +1,43 @@
+@if (loading$ | async) {
+  <div class="flex justify-center mt-10"><nz-spin nzSize="large" /></div>
+} @else {
+  @if (pr$ | async; as pr) {
+    <app-page-header [title]="pr.code" [subtitle]="pr.title">
+      @if (pr.status === 'Draft') {
+        <button nz-button nzType="primary" (click)="submit(pr.id)">Submit for Approval</button>
+        <a nz-button [routerLink]="['/procurement/purchase-requests', pr.id, 'edit']" class="ml-2">Edit</a>
+      }
+      <a nz-button routerLink="/procurement/purchase-requests" class="ml-2">Back</a>
+    </app-page-header>
+
+    <nz-descriptions nzBordered [nzColumn]="2" class="mb-6">
+      <nz-descriptions-item nzTitle="Status"><app-status-badge [status]="pr.status" /></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Department">{{ pr.department ?? '-' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Expected Date">{{ pr.expectedDate | date:'dd/MM/yyyy' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Total Amount">{{ pr.totalAmount | number }} {{ pr.currency }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Description" [nzSpan]="2">{{ pr.description ?? '-' }}</nz-descriptions-item>
+    </nz-descriptions>
+
+    <nz-divider nzText="Line Items" />
+
+    <nz-table [nzData]="pr.items" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Item</th><th>Qty</th><th>Unit</th><th>Unit Price</th><th>Total</th><th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of pr.items; track item.id) {
+          <tr>
+            <td>{{ item.itemName }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit ?? '-' }}</td>
+            <td>{{ item.unitPrice | number }}</td>
+            <td>{{ item.totalPrice | number }}</td>
+            <td>{{ item.notes ?? '-' }}</td>
+          </tr>
+        }
+      </tbody>
+    </nz-table>
+  }
+}

@@ -1,0 +1,29 @@
+<app-page-header title="Purchase Requests">
+  <button nz-button nzType="primary" routerLink="/procurement/purchase-requests/new">
+    <span nz-icon nzType="plus"></span>
+    New Request
+  </button>
+</app-page-header>
+
+<app-filter-bar
+  searchPlaceholder="Tìm theo tiêu đề, mã PR..."
+  [filters]="filterConfigs"
+  (filterChange)="onFilterChange($event)"
+/>
+
+<app-data-table
+  [columns]="columns"
+  [data]="(items$ | async) ?? []"
+  [loading]="(loading$ | async) ?? false"
+  [total]="(total$ | async) ?? 0"
+  emptyIcon="file-text"
+  emptyTitle="Chưa có yêu cầu mua hàng"
+  emptyDescription="Tạo yêu cầu đầu tiên để bắt đầu."
+  (pageChange)="onPageChange($event)"
+/>
+
+<ng-template #actionsTpl let-pr>
+  <button nz-button nzType="text" nzSize="small" [routerLink]="['/procurement/purchase-requests', pr.id]" class="btn-view">
+    <span nz-icon nzType="eye"></span>
+  </button>
+</ng-template>

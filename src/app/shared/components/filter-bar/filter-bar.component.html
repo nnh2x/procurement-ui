@@ -1,0 +1,27 @@
+<div class="filter-bar" [formGroup]="form">
+  <div class="filter-bar-left">
+    <div class="search-wrap">
+      <app-search-input formControlName="search" [placeholder]="searchPlaceholder" />
+    </div>
+
+    @for (filter of filters; track filter.key) {
+      <div class="filter-select-wrap" [style.width]="filter.width ?? '160px'">
+        <app-select
+          [formControlName]="filter.key"
+          [placeholder]="filter.label"
+          [options]="filter.options"
+        />
+      </div>
+    }
+  </div>
+
+  <div class="filter-bar-right">
+    @if (hasActiveFilters()) {
+      <button nz-button nzType="text" class="btn-clear" (click)="clearAll()">
+        <span nz-icon nzType="close-circle"></span>
+        Xóa bộ lọc
+      </button>
+    }
+    <ng-content />
+  </div>
+</div>

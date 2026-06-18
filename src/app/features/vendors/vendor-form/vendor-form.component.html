@@ -1,0 +1,53 @@
+<app-page-header title="Add Vendor" />
+
+<form nz-form [formGroup]="form" nzLayout="vertical" (ngSubmit)="submit()" class="max-w-xl">
+  <nz-form-item>
+    <nz-form-label nzRequired>Name</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="name" placeholder="Vendor name" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Tax Code</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="taxCode" placeholder="0123456789" />
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label>Contact Name</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="contactName" placeholder="Full name" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label>Contact Email</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="contactEmail" placeholder="contact@vendor.com" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <nz-form-item>
+    <nz-form-label>Phone</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="phone" placeholder="+84..." />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Address</nz-form-label>
+    <nz-form-control>
+      <textarea nz-input formControlName="address" [nzAutosize]="{ minRows: 2 }"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="flex gap-3">
+    <button nz-button nzType="primary" type="submit" [nzLoading]="(loading$ | async) ?? false">
+      Add Vendor
+    </button>
+    <a nz-button routerLink="/procurement/vendors">Cancel</a>
+  </div>
+</form>

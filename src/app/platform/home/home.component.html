@@ -1,0 +1,92 @@
+<div class="home">
+  <!-- Header -->
+  <header class="home-header">
+    <div class="home-brand">
+      <div class="brand-mark">
+        <span nz-icon nzType="appstore" nzTheme="fill"></span>
+      </div>
+      <span class="brand-name">NexusERP</span>
+    </div>
+    @if (user$ | async; as user) {
+      <div class="home-user">
+        <div class="user-details">
+          <span class="user-name">{{ user.email.split('@')[0] | titlecase }}</span>
+          <span class="user-email">{{ user.email }}</span>
+        </div>
+        <div class="user-avatar">{{ user.email[0].toUpperCase() }}</div>
+        <button nz-button nzType="text" class="btn-logout" nz-tooltip nzTooltipTitle="Đăng xuất" (click)="logout()">
+          <span nz-icon nzType="logout"></span>
+        </button>
+      </div>
+    }
+  </header>
+
+  <!-- Hero -->
+  <section class="home-hero">
+    <div class="hero-inner">
+      @if (user$ | async; as user) {
+        <div class="hero-greeting">
+          <span class="greeting-dot"></span>
+          Xin chào, {{ user.email.split('@')[0] | titlecase }}
+        </div>
+      }
+      <h1 class="hero-title">Chào mừng đến với<br /><span class="hero-title-accent">NexusERP</span></h1>
+      <p class="hero-sub">Nền tảng quản trị doanh nghiệp toàn diện — chọn module để bắt đầu.</p>
+    </div>
+    <div class="hero-decoration">
+      <div class="deco-ring deco-ring--1"></div>
+      <div class="deco-ring deco-ring--2"></div>
+      <div class="deco-ring deco-ring--3"></div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <main class="home-main">
+    <div class="services-header">
+      <h2 class="services-title">Modules</h2>
+      <span class="services-count">{{ services.length }} dịch vụ</span>
+    </div>
+
+    <div class="services-grid">
+      @for (svc of services; track svc.id; let i = $index) {
+        <button
+          class="svc-card"
+          [class.svc-card--active]="svc.status === 'active'"
+          [class.svc-card--disabled]="svc.status === 'coming-soon'"
+          [style.--svc-color]="svc.color"
+          [style.--svc-color-rgb]="svc.colorRgb"
+          [style.animation-delay]="(i * 60) + 'ms'"
+          (click)="navigate(svc)"
+        >
+          <div class="svc-icon">
+            <span nz-icon [nzType]="svc.icon" nzTheme="outline"></span>
+          </div>
+
+          <div class="svc-body">
+            <div class="svc-top">
+              <h3 class="svc-name">{{ svc.name }}</h3>
+              @if (svc.status === 'active') {
+                <span class="svc-badge svc-badge--active">
+                  <i class="badge-dot"></i>Active
+                </span>
+              } @else {
+                <span class="svc-badge svc-badge--soon">Soon</span>
+              }
+            </div>
+            <p class="svc-desc">{{ svc.description }}</p>
+          </div>
+
+          @if (svc.status === 'active') {
+            <div class="svc-arrow">
+              <span nz-icon nzType="arrow-right"></span>
+            </div>
+          }
+        </button>
+      }
+    </div>
+  </main>
+
+  <footer class="home-footer">
+    <span>© 2025 NexusERP · v1.0.0</span>
+  </footer>
+</div>

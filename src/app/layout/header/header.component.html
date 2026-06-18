@@ -1,0 +1,29 @@
+<header class="app-header">
+  <div class="header-left">
+    <nav class="breadcrumb">
+      <a routerLink="/" class="breadcrumb-item breadcrumb-item--link">
+        <span nz-icon nzType="appstore" nzTheme="fill"></span>
+        <span>NexusERP</span>
+      </a>
+      <span class="breadcrumb-sep">
+        <span nz-icon nzType="right"></span>
+      </span>
+      <span class="breadcrumb-item breadcrumb-item--current">Procurement</span>
+    </nav>
+  </div>
+
+  <div class="header-right">
+    @if (user$ | async; as user) {
+      <div class="header-user">
+        <div class="header-avatar">{{ user.email[0].toUpperCase() }}</div>
+        <div class="header-user-info">
+          <span class="header-user-name">{{ user.email.split('@')[0] }}</span>
+        </div>
+      </div>
+      <div class="header-divider"></div>
+      <button nz-button nzType="text" class="header-btn" nz-tooltip nzTooltipTitle="Đăng xuất" (click)="logout()">
+        <span nz-icon nzType="logout"></span>
+      </button>
+    }
+  </div>
+</header>
