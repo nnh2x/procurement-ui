@@ -1,22 +1,26 @@
-<aside class="sidebar">
-  <div class="sidebar-top">
-    <a routerLink="/" class="sidebar-back">
-      <span nz-icon nzType="arrow-left"></span>
-      <span>Tất cả modules</span>
-    </a>
-  </div>
+<aside class="sidebar" [class.sidebar--collapsed]="collapsed">
+
+  <!-- Logo -->
+  <a routerLink="/" class="sidebar-logo">
+    <div class="sidebar-logo-mark">
+      <span nz-icon nzType="appstore" nzTheme="fill"></span>
+    </div>
+    <span class="sidebar-logo-name">NexusERP</span>
+  </a>
 
   @if (serviceNav; as nav) {
-    <div class="sidebar-service">
-      <div class="sidebar-service-icon" [style.background]="nav.color + '18'" [style.border-color]="nav.color + '30'">
+    <!-- Module badge -->
+    <div class="sidebar-module" [nz-tooltip]="collapsed ? nav.label : ''" nzTooltipPlacement="right">
+      <div class="sidebar-module-icon" [style.background]="nav.color + '18'" [style.border-color]="nav.color + '30'">
         <span nz-icon [nzType]="nav.icon" nzTheme="outline" [style.color]="nav.color"></span>
       </div>
-      <div class="sidebar-service-info">
-        <span class="sidebar-service-name">{{ nav.label }}</span>
-        <span class="sidebar-service-sub">Module</span>
+      <div class="sidebar-module-info">
+        <span class="sidebar-module-name">{{ nav.label }}</span>
+        <span class="sidebar-module-tag">Module</span>
       </div>
     </div>
 
+    <!-- Nav -->
     <nav class="sidebar-nav">
       <span class="sidebar-nav-label">Menu</span>
       @for (item of menuItems; track item.path) {
@@ -24,6 +28,8 @@
           class="sidebar-nav-item"
           [routerLink]="item.path"
           routerLinkActive="sidebar-nav-item--active"
+          [nz-tooltip]="collapsed ? item.label : ''"
+          nzTooltipPlacement="right"
         >
           <span class="nav-item-icon" nz-icon [nzType]="item.icon"></span>
           <span class="nav-item-label">{{ item.label }}</span>
@@ -31,4 +37,16 @@
       }
     </nav>
   }
+
+  <!-- Toggle + Back -->
+  <div class="sidebar-bottom">
+    <button class="sidebar-toggle" (click)="toggle()" [nz-tooltip]="collapsed ? 'Expand' : 'Collapse'" nzTooltipPlacement="right">
+      <span nz-icon [nzType]="collapsed ? 'menu-unfold' : 'menu-fold'"></span>
+    </button>
+    <a routerLink="/" class="sidebar-back" [nz-tooltip]="collapsed ? 'All modules' : ''" nzTooltipPlacement="right">
+      <span nz-icon nzType="arrow-left"></span>
+      <span class="sidebar-back-label">All modules</span>
+    </a>
+  </div>
+
 </aside>

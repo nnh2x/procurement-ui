@@ -34,7 +34,7 @@ export class VendorListComponent implements OnInit {
     { key: 'contactEmail', label: 'Email', field: 'contactEmail' },
     { key: 'phone', label: 'Điện thoại', field: 'phone', width: '130px' },
     { key: 'status', label: 'Trạng thái', field: 'status', type: 'badge', width: '120px' },
-    { key: 'edit', label: 'Chỉnh sửa', field: 'edit', type: 'view', width: '120px' },
+    { key: 'edit', label: '', field: 'edit', type: 'edit', width: '60px', align: 'center' },
   ];
 
   readonly filterConfigs: FilterConfig[] = [

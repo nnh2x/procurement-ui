@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../styles/environment';
 import { User, AuthTokens } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -46,6 +46,10 @@ export class AuthService {
 
   getAccessToken(): string | null {
     return localStorage.getItem('access_token');
+  }
+
+  getCurrentUser(): User | null {
+    return this.currentUser$.getValue();
   }
 
   refresh(): Observable<string> {

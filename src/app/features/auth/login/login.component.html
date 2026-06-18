@@ -1,24 +1,93 @@
 <div class="login-page">
-  <nz-card class="login-card" nzTitle="Procurement Portal">
-    @if (errorMessage) {
-      <nz-alert nzType="error" [nzMessage]="errorMessage" nzShowIcon class="mb-4" />
-    }
-    <form nz-form [formGroup]="form" nzLayout="vertical" (ngSubmit)="submit()">
-      <nz-form-item>
-        <nz-form-label nzRequired>Email</nz-form-label>
-        <nz-form-control nzErrorTip="Please enter a valid email">
-          <input nz-input formControlName="email" type="email" placeholder="you@company.com" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label nzRequired>Password</nz-form-label>
-        <nz-form-control nzErrorTip="Password is required">
-          <input nz-input formControlName="password" type="password" placeholder="••••••••" />
-        </nz-form-control>
-      </nz-form-item>
-      <button nz-button nzType="primary" nzBlock [nzLoading]="loading" type="submit">
-        Sign in
-      </button>
-    </form>
-  </nz-card>
+
+  <!-- Left brand panel -->
+  <div class="login-brand">
+    <div class="brand-content">
+      <div class="brand-logo">
+        <span nz-icon nzType="appstore" nzTheme="fill"></span>
+      </div>
+      <h1 class="brand-name">NexusERP</h1>
+      <p class="brand-tagline">Nền tảng quản trị doanh nghiệp toàn diện — đơn giản, hiệu quả, đáng tin cậy.</p>
+
+      <ul class="brand-features">
+        <li>
+          <span class="feat-icon" nz-icon nzType="safety-certificate" nzTheme="fill"></span>
+          <span>Bảo mật dữ liệu cấp doanh nghiệp</span>
+        </li>
+        <li>
+          <span class="feat-icon" nz-icon nzType="thunderbolt" nzTheme="fill"></span>
+          <span>Xử lý nghiệp vụ nhanh chóng</span>
+        </li>
+        <li>
+          <span class="feat-icon" nz-icon nzType="team" nzTheme="fill"></span>
+          <span>Cộng tác nhóm liền mạch</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="brand-deco">
+      <div class="deco-circle deco-circle--1"></div>
+      <div class="deco-circle deco-circle--2"></div>
+      <div class="deco-circle deco-circle--3"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="login-form-panel">
+    <div class="login-form-inner">
+
+      <div class="form-header">
+        <h2 class="form-title">Chào mừng trở lại</h2>
+        <p class="form-subtitle">Đăng nhập để truy cập hệ thống</p>
+      </div>
+
+      @if (errorMessage) {
+        <nz-alert nzType="error" [nzMessage]="errorMessage" nzShowIcon class="form-alert" />
+      }
+
+      <form nz-form [formGroup]="form" nzLayout="vertical" (ngSubmit)="submit()" class="form-body">
+        <nz-form-item>
+          <nz-form-label nzRequired>Email</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập email hợp lệ">
+            <nz-input-group [nzPrefix]="emailIcon">
+              <input nz-input formControlName="email" type="email" placeholder="you@company.com" />
+            </nz-input-group>
+            <ng-template #emailIcon>
+              <span nz-icon nzType="mail" style="color: #94a3b8"></span>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzRequired>
+            <span>Mật khẩu</span>
+          </nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu">
+            <nz-input-group [nzPrefix]="lockIcon" [nzSuffix]="eyeIcon">
+              <input nz-input formControlName="password" [type]="showPassword ? 'text' : 'password'" placeholder="••••••••" />
+            </nz-input-group>
+            <ng-template #lockIcon>
+              <span nz-icon nzType="lock" style="color: #94a3b8"></span>
+            </ng-template>
+            <ng-template #eyeIcon>
+              <span
+                nz-icon
+                [nzType]="showPassword ? 'eye-invisible' : 'eye'"
+                style="color: #94a3b8; cursor: pointer"
+                (click)="showPassword = !showPassword"
+              ></span>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button nzType="primary" nzBlock [nzLoading]="loading" type="submit" class="btn-submit">
+          <span nz-icon nzType="login"></span>
+          Đăng nhập
+        </button>
+      </form>
+
+      <p class="form-footer">© 2025 NexusERP · Mọi quyền được bảo lưu</p>
+    </div>
+  </div>
+
 </div>

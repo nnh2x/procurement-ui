@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../styles/environment';
 import { ApiResponse } from '../models/api-response.model';
 
 @Injectable({ providedIn: 'root' })
@@ -31,6 +31,12 @@ export class ApiService {
   put<T>(path: string, body: unknown): Observable<T> {
     return this.http
       .put<ApiResponse<T>>(`${this.base}${path}`, body)
+      .pipe(map((res) => res.data));
+  }
+
+  delete<T>(path: string): Observable<T> {
+    return this.http
+      .delete<ApiResponse<T>>(`${this.base}${path}`)
       .pipe(map((res) => res.data));
   }
 

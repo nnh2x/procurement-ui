@@ -1,93 +1,123 @@
 .app-header {
   height: 56px;
-  background: var(--color-surface, #fff);
-  border-bottom: 1px solid var(--color-border, #e2e8f0);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px;
+  padding: 0 24px;
   flex-shrink: 0;
 }
 
+// ── Breadcrumb ────────────────────────────────────────
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  font-size: 13.5px;
 }
 
 .breadcrumb-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13.5px;
+  gap: 5px;
 
   &--link {
-    color: var(--color-text-secondary, #64748b);
+    color: var(--color-text-muted);
     text-decoration: none;
     font-weight: 500;
-    border-radius: 6px;
-    padding: 4px 8px;
-    transition: all 0.15s ease;
+    border-radius: 5px;
+    padding: 3px 7px;
+    letter-spacing: -0.01em;
+    transition: background 150ms ease, color 150ms ease;
 
     &:hover {
-      background: var(--color-bg, #f8fafc);
-      color: var(--color-text, #0f172a);
+      background: var(--color-surface-raised);
+      color: var(--color-text-secondary);
     }
   }
 
   &--current {
-    font-weight: 600;
-    padding: 4px 8px;
-    background: var(--color-primary-light, #eef2ff);
-    border-radius: 6px;
-    color: var(--color-primary, #6366f1);
+    font-weight: 500;
+    font-size: 13.5px;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+    padding: 3px 7px;
+    background: var(--color-primary-muted, rgba(99,102,241,0.08));
+    border-radius: 5px;
+    color: var(--color-primary);
   }
 }
 
 .breadcrumb-sep {
-  font-size: 10px;
-  color: var(--color-text-muted, #94a3b8);
+  font-size: 9px;
+  color: var(--color-border-hover);
 }
 
+// ── Right ─────────────────────────────────────────────
 .header-right {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+}
+
+.header-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--color-border);
+  margin: 0 6px;
 }
 
 .header-user {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 8px;
+  padding: 4px 8px 4px 5px;
   border-radius: 8px;
+  transition: background 150ms ease;
+  cursor: default;
+
+  &:hover { background: var(--color-surface-raised); }
 }
 
 .header-avatar {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+.header-user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .header-user-name {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text, #0f172a);
-  text-transform: capitalize;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
 }
 
-.header-divider {
-  width: 1px;
-  height: 20px;
-  background: var(--color-border, #e2e8f0);
-  margin: 0 4px;
+.header-user-role {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: 0;
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-btn {
@@ -96,12 +126,215 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  border-radius: 8px !important;
-  color: var(--color-text-muted, #94a3b8) !important;
-  transition: all 0.15s ease !important;
+  border-radius: 7px !important;
+  color: var(--color-text-muted) !important;
+  padding: 0 !important;
 
   &:hover {
-    background: #fef2f2 !important;
-    color: #ef4444 !important;
+    background: var(--color-surface-raised) !important;
+    color: var(--color-text-secondary) !important;
   }
+
+  &.btn-danger:hover {
+    background: #fef2f2 !important;
+    color: #dc2626 !important;
+  }
+}
+
+.header-user {
+  cursor: pointer;
+}
+
+.header-user-chevron {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+  transition: transform 150ms ease;
+}
+
+// ── Notification panel ────────────────────────────────
+::ng-deep .notif-dropdown .ant-dropdown-menu {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-lg, 0 10px 40px rgba(0,0,0,0.12)) !important;
+  border: 1px solid var(--color-border) !important;
+  overflow: hidden;
+  width: 360px;
+}
+
+.notif-panel {
+  width: 360px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.notif-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.notif-mark-read {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+
+  &:hover { text-decoration: underline; }
+}
+
+.notif-list { max-height: 320px; overflow-y: auto; }
+
+.notif-item {
+  display: flex;
+  gap: 10px;
+  padding: 11px 14px;
+  cursor: pointer;
+  transition: background 120ms ease;
+  position: relative;
+
+  &:hover { background: var(--color-surface-raised); }
+
+  &--unread { background: rgba(99,102,241,0.03); }
+}
+
+.notif-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.notif-body { flex: 1; min-width: 0; }
+
+.notif-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+
+.notif-item-desc {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notif-item-time {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.notif-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.notif-footer {
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.notif-view-all {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-primary);
+  cursor: pointer;
+
+  &:hover { text-decoration: underline; }
+}
+
+// ── User menu ─────────────────────────────────────────
+::ng-deep .user-menu {
+  min-width: 220px !important;
+  border-radius: 12px !important;
+  padding: 4px !important;
+  box-shadow: var(--shadow-lg, 0 10px 40px rgba(0,0,0,0.12)) !important;
+  border: 1px solid var(--color-border) !important;
+
+  li.ant-menu-item {
+    border-radius: 7px !important;
+    margin: 1px 0 !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 13.5px !important;
+    color: var(--color-text-secondary) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+
+    &:hover { background: var(--color-surface-raised) !important; color: var(--color-text) !important; }
+
+    .anticon { font-size: 14px !important; }
+  }
+
+  li.ant-menu-item.menu-item-danger {
+    color: #dc2626 !important;
+    &:hover { background: #fef2f2 !important; }
+  }
+}
+
+.user-menu-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px 10px;
+  pointer-events: none;
+}
+
+.user-menu-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.user-menu-info { display: flex; flex-direction: column; line-height: 1.3; }
+
+.user-menu-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.user-menu-email {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
 }

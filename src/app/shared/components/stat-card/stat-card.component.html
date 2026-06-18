@@ -1,3 +1,18 @@
-<nz-card class="stat-card">
-  <nz-statistic [nzTitle]="title" [nzValue]="value" [nzValueStyle]="{ color: color }" />
-</nz-card>
+<div class="stat-card">
+  <div class="stat-icon" [style.background]="color + '15'" [style.color]="color">
+    <span nz-icon [nzType]="icon" nzTheme="outline"></span>
+  </div>
+  <div class="stat-body">
+    <div class="stat-value">{{ value }}</div>
+    <div class="stat-title">{{ title }}</div>
+    @if (subtitle) {
+      <div class="stat-subtitle">{{ subtitle }}</div>
+    }
+    @if (trend) {
+      <div class="stat-trend" [class.trend-up]="trend === 'up'" [class.trend-down]="trend === 'down'">
+        <span nz-icon [nzType]="trend === 'up' ? 'rise' : 'fall'"></span>
+        <span>{{ trendLabel }}</span>
+      </div>
+    }
+  </div>
+</div>

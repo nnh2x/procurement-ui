@@ -1,16 +1,19 @@
 import { Component, Input } from '@angular/core';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-stat-card',
   standalone: true,
-  imports: [NzCardModule, NzStatisticModule],
+  imports: [NzIconModule],
   templateUrl: './stat-card.component.html',
   styleUrl: './stat-card.component.scss',
 })
 export class StatCardComponent {
   @Input() title = '';
-  @Input() value = 0;
-  @Input() color = '#1890ff';
+  @Input() value: number | string = 0;
+  @Input() icon = 'bar-chart';
+  @Input() color = '#6366f1';
+  @Input() trend: 'up' | 'down' | null = null;
+  @Input() trendLabel = '';
+  @Input() subtitle = '';
 }

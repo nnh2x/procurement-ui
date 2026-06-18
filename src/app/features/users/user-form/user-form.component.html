@@ -1,0 +1,64 @@
+<form nz-form [formGroup]="form" nzLayout="vertical">
+  <nz-form-item>
+    <nz-form-label nzRequired>Username</nz-form-label>
+    <nz-form-control nzErrorTip="Username is required (min 3 characters)">
+      <input nz-input formControlName="username" placeholder="e.g. john.doe" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Full Name</nz-form-label>
+    <nz-form-control nzErrorTip="Full name is required">
+      <input nz-input formControlName="fullName" placeholder="e.g. John Doe" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Email</nz-form-label>
+    <nz-form-control nzErrorTip="Please enter a valid email address">
+      <input nz-input formControlName="email" placeholder="e.g. john@company.com" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Department</nz-form-label>
+    <nz-form-control nzErrorTip="Department is required">
+      <nz-select formControlName="department" nzPlaceHolder="Select department">
+        @for (dept of departments; track dept) {
+          <nz-option [nzValue]="dept" [nzLabel]="dept" />
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Role</nz-form-label>
+    <nz-form-control nzErrorTip="Role is required">
+      <nz-select formControlName="role" nzPlaceHolder="Select role">
+        @for (r of roles; track r.value) {
+          <nz-option [nzValue]="r.value" [nzLabel]="r.label" />
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Status</nz-form-label>
+    <nz-form-control nzErrorTip="Status is required">
+      <nz-select formControlName="status">
+        @for (s of statuses; track s) {
+          <nz-option [nzValue]="s" [nzLabel]="s" />
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  @if (!user) {
+    <nz-form-item>
+      <nz-form-label nzRequired>Password</nz-form-label>
+      <nz-form-control nzErrorTip="Password is required">
+        <input nz-input type="password" formControlName="password" placeholder="Enter password" />
+      </nz-form-control>
+    </nz-form-item>
+  }
+</form>

@@ -3,6 +3,8 @@ export interface User {
   email: string;
   tenantId: string;
   planCode: string;
+  role?: string;
+  permissions?: Array<{ module: string; actions: string[] }>;
 }
 
 export interface AuthTokens {

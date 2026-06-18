@@ -29,13 +29,17 @@ import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
     .clear-icon:hover { color: var(--color-text-secondary, #64748b); }
     ::ng-deep .search-group .ant-input-affix-wrapper {
       border-radius: var(--radius-sm, 8px) !important;
-      border-color: var(--color-border, #e2e8f0) !important;
-      height: 36px !important;
+      border-color: var(--color-border, #e4e8ef) !important;
+      height: 34px !important;
+      background: var(--color-surface, #fff) !important;
+      transition: border-color 150ms ease, box-shadow 150ms ease !important;
     }
-    ::ng-deep .search-group .ant-input-affix-wrapper:hover,
+    ::ng-deep .search-group .ant-input-affix-wrapper:hover {
+      border-color: var(--color-border-hover, #c7cdd8) !important;
+    }
     ::ng-deep .search-group .ant-input-affix-wrapper:focus-within {
       border-color: var(--color-primary, #6366f1) !important;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
     }
   `],
 })

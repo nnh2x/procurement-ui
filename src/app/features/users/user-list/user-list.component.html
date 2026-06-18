@@ -1,0 +1,44 @@
+<app-page-header title="Users" subtitle="Manage system users and permissions">
+  <button nz-button nzType="primary" (click)="openCreateDrawer()">
+    <span nz-icon nzType="plus"></span>
+    Add User
+  </button>
+</app-page-header>
+
+<app-filter-bar
+  searchPlaceholder="Search by name, email..."
+  [filters]="filterConfigs"
+  (filterChange)="onFilterChange($event)"
+/>
+
+<app-data-table
+  [columns]="columns"
+  [data]="(items$ | async) ?? []"
+  [loading]="(loading$ | async) ?? false"
+  [total]="(total$ | async) ?? 0"
+  emptyIcon="user"
+  emptyTitle="No users found"
+  emptyDescription="Add the first user to get started."
+  (pageChange)="onPageChange($event)"
+  (rowView)="onRowView($event)"
+  (rowEdit)="onRowEdit($event)"
+  (rowDelete)="onRowDelete($event)"
+/>
+
+<app-drawer-form
+  [(visible)]="drawerVisible"
+  [title]="drawerTitle"
+  [loading]="(loading$ | async) ?? false"
+  (submitted)="onDrawerSubmit()"
+>
+  <app-user-form [user]="editingUser" #userForm />
+</app-drawer-form>
+
+<app-confirm-dialog
+  [(visible)]="confirmVisible"
+  title="Delete User"
+  message="Are you sure you want to delete this user?"
+  description="This action cannot be undone."
+  [danger]="true"
+  (confirmed)="onDeleteConfirm()"
+/>

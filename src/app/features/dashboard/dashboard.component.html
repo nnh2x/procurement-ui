@@ -1,27 +1,33 @@
 <app-page-header title="Dashboard" subtitle="Procurement overview" />
 
 @if (loading$ | async) {
-  <div class="flex justify-center mt-10"><nz-spin nzSize="large" /></div>
+  <div nz-row [nzGutter]="[16, 16]">
+    @for (i of [1,2,3,4,5,6]; track i) {
+      <div nz-col [nzSpan]="6">
+        <div class="stat-skeleton"></div>
+      </div>
+    }
+  </div>
 } @else {
-  @if (summary$ | async; as summary) {
+  @if (summary$ | async; as s) {
     <div nz-row [nzGutter]="[16, 16]">
       <div nz-col [nzSpan]="6">
-        <app-stat-card title="Total PRs" [value]="summary.totalPrs" color="#1890ff" />
+        <app-stat-card title="Total PRs" [value]="s.totalPrs" icon="file-text" color="#6366f1" />
       </div>
       <div nz-col [nzSpan]="6">
-        <app-stat-card title="Draft" [value]="summary.draftPrs" color="#faad14" />
+        <app-stat-card title="Draft" [value]="s.draftPrs" icon="edit" color="#f59e0b" />
       </div>
       <div nz-col [nzSpan]="6">
-        <app-stat-card title="Submitted" [value]="summary.submittedPrs" color="#722ed1" />
+        <app-stat-card title="Submitted" [value]="s.submittedPrs" icon="send" color="#8b5cf6" />
       </div>
       <div nz-col [nzSpan]="6">
-        <app-stat-card title="Approved" [value]="summary.approvedPrs" color="#52c41a" />
+        <app-stat-card title="Approved" [value]="s.approvedPrs" icon="check-circle" color="#10b981" />
       </div>
       <div nz-col [nzSpan]="6">
-        <app-stat-card title="Rejected" [value]="summary.rejectedPrs" color="#f5222d" />
+        <app-stat-card title="Rejected" [value]="s.rejectedPrs" icon="close-circle" color="#ef4444" />
       </div>
       <div nz-col [nzSpan]="6">
-        <app-stat-card title="Total Vendors" [value]="summary.totalVendors" color="#13c2c2" />
+        <app-stat-card title="Vendors" [value]="s.totalVendors" icon="team" color="#0ea5e9" />
       </div>
     </div>
   }
