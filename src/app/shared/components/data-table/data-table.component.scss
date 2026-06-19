@@ -12,20 +12,6 @@
   min-height: 0;
 }
 
-// flex chain for fill-height
-::ng-deep .data-table {
-  .ant-table-wrapper,
-  .ant-spin-nested-loading,
-  .ant-spin-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-  }
-  .ant-table { flex: 1; display: flex; flex-direction: column; }
-  .ant-table-container { flex: 1; display: flex; flex-direction: column; }
-  .ant-table-body, .ant-table-placeholder { flex: 1; }
-}
 
 // ── Code chip ─────────────────────────────────────────
 .code-chip {

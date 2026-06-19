@@ -16,6 +16,7 @@
   [data]="(items$ | async) ?? []"
   [loading]="(loading$ | async) ?? false"
   [total]="(total$ | async) ?? 0"
+  scrollY="calc(100vh - 360px)"
   emptyIcon="team"
   emptyTitle="Chưa có nhà cung cấp"
   emptyDescription="Thêm nhà cung cấp đầu tiên để bắt đầu."

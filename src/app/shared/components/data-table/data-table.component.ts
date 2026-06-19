@@ -43,6 +43,7 @@ export class DataTableComponent {
   @Input() emptyTitle = 'Không có dữ liệu';
   @Input() emptyDescription = '';
   @Input() selectable = false;
+  @Input() scrollY?: string;
 
   @Output() pageChange = new EventEmitter<number>();
   @Output() rowView = new EventEmitter<any>();
